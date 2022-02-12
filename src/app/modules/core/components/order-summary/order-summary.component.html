@@ -1,0 +1,19 @@
+<div style="height: 100%;" fxLayout="column" fxLayoutAlign="space-between none">
+    <div class="order-summary-wrapper">
+        <div class="order-summary-title" fxLayout="row" fxLayoutAlign="space-between center">
+            <h2>Order Summary</h2>
+            <span class="edit-order">edit order</span>
+        </div>
+        <div class="order-items">
+            <app-product *ngFor="let product of products$ | async" [product]="product"></app-product>
+            <div class="order-calculations">
+                <div fxLayout="row" fxLayoutAlign="space-between center"><span>Subtotal</span><span>$398</span></div>
+                <div fxLayout="row" fxLayoutAlign="space-between center"><span>Shipping</span><span>Free</span></div>
+                <div fxLayout="row" fxLayoutAlign="space-between center"><span>Taxes</span><span>$12.12</span></div>
+            </div>      
+            <div class="line"></div>   
+            <div class="total" fxLayout="row" fxLayoutAlign="space-between center"><span>Total</span><span>$410.12</span></div>  
+        </div>
+    </div>
+    <div class="note">All purchases are subject to our <span>Terms and Conditions</span>.</div>
+</div>

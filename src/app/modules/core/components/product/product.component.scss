@@ -1,0 +1,44 @@
+@import '../../../../../assets/styles/_variables.scss';
+
+.item {
+    &-details {
+        margin-top: 7px;
+        font-size: 10px;
+        color: $itemInfoColor;
+        font-weight: 500;
+    }
+    &-title {
+        font-family: $fontFamily;
+        font-size: 12px;
+        line-height: 11px;
+        color: $smallTextColor;
+    }
+    &-price {
+        color: $smallTextColor;
+        font-size: 12px;
+    }
+    &-img {
+        box-sizing: border-box;
+        background: #F3F3F3;
+        border: 1px solid #E3E3E3;
+        border-radius: 1px;
+        width: 46px;
+        height: 46px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+
+        img {
+            width: 43px;
+        }
+    }
+}
+
+.line {
+    height: 1px;
+    background-color: #979797;
+    width: 100%;
+    opacity: 0.2;
+    margin: 10px 0px;
+}

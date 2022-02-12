@@ -1,0 +1,14 @@
+<div class="order-item" fxLayout="row" fxLayoutAlign="none center">
+    <div class="item-img"><img src="{{product.icon}}" alt="Chelsea Boot"></div>
+    <div style="max-width: 215px; width: 100%" fxLayout="row" fxLayoutAlign="space-between start">
+        <div class="item-info">
+            <div class="item-title">{{product.name}}</div>
+            <div class="item-details">
+                <div class="item-quality">{{product.quality}}</div>
+                <div class="item-quantity">Quantity: {{product.quantity}}</div>
+            </div>
+        </div>
+        <div class="item-price">${{product.cost}}</div>
+    </div>
+</div>
+<div class="line"></div>

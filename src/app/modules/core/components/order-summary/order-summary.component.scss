@@ -1,0 +1,51 @@
+@import '../../../../../assets/styles/_variables.scss';
+
+.line {
+    height: 1px;
+    background-color: #979797;
+    width: 100%;
+    opacity: 0.2;
+    margin: 10px 0px;
+}
+
+.order-summary-title {
+    h2 {
+        font-family: $fontFamily;
+        color: $mainColor;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: -1.06px;
+    }
+    margin-bottom: 14px;
+}
+
+.edit-order {
+    color: $editOrderColor;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.order-items {
+    max-width: 270px;
+}
+
+.order-calculations {
+    color: $smallTextColor;
+    font-size: 12px;
+}
+
+.total {
+    color: $totalColor;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.note {
+    text-align: center;
+    font-size: 10px;
+    color: #9C9C9C;
+    span {
+        text-decoration: underline;
+    }
+}

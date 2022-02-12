@@ -1,0 +1,41 @@
+<h2 class="shipping-info-label">Shipping Info</h2>
+<div class="recipient-info">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <h2 class="form-label">Recipient</h2>
+        <div class="input-wrapper">
+            <input type="text" placeholder="Full Name" formControlName="fullName">
+            <div *ngIf="(profileForm.get('fullName').touched || profileForm.get('fullName').dirty) &&profileForm.get('fullName').invalid" class="hint"><span>Please enter recipient full name</span></div>
+        </div>
+
+        <div class="phone-info" fxLayout="row" fxLayoutAlign="none center">
+            <input type="text" class="phone" placeholder="Daytime Phone" formControlName="daytimePhone">
+            <div class="delivery">For delivery <br /> questions only</div>
+            <div *ngIf="(profileForm.get('daytimePhone').touched || profileForm.get('daytimePhone').dirty) &&profileForm.get('daytimePhone').invalid" class="hint"><span>Please enter your daytime phone</span></div>
+        </div>
+
+        <h2 class="form-label">Address</h2>
+        <div class="input-wrapper">
+            <input type="text" placeholder="Street Address" formControlName="road">
+            <div *ngIf="(profileForm.get('road').touched || profileForm.get('road').dirty) &&profileForm.get('road').invalid" class="hint"><span>Please enter your street</span></div>
+        </div>
+        <input type="text" placeholder="Apt, Suite, Bldg, Gate Code. (optional)" formControlName="optionalGeoInfo">
+        
+        <div class="input-wrapper">
+            <input type="text" placeholder="City" formControlName="city">
+            <span (click)="onDetectFocus()" class="detect_focus"><img [src]="detectGeoClicked? 'assets/images/detect_focus.png':'assets/images/detect_unfocus.png'" alt="Detect Focus"></span>
+            <div *ngIf="(profileForm.get('city').touched || profileForm.get('city').dirty) &&profileForm.get('city').invalid" class="hint"><span>Please enter your city</span></div>
+        </div>
+        <div class="input-wrapper">
+            <input type="text" list="country_list" class="country" placeholder="Country" formControlName="country">
+            <datalist id="country_list">
+                <option>Ukraine</option>
+                <option>Moldova</option>
+            </datalist>
+            <div *ngIf="(profileForm.get('country').touched || profileForm.get('country').dirty) && profileForm.get('country').invalid" class="hint"><span>Please enter your country</span></div>
+            <input type="text" class="zip" placeholder="ZIP" formControlName="postcode">
+            <div *ngIf="(profileForm.get('postcode').touched || profileForm.get('postcode').dirty) &&profileForm.get('postcode').invalid" class="hint zip-hint"><span>Please enter your ZIP</span></div>
+        </div>
+
+        <button type="submit">Continue</button>
+    </form>
+</div>

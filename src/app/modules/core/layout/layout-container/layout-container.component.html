@@ -1,0 +1,29 @@
+<nav>
+    <div class="nav-info" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="nav-label" fxLayout="row" fxLayoutAlign="center center">
+            <span class="nav-label-icon"><img src="assets/images/nav-icon.png" alt="Nav Icon"></span> 
+            <span class="nav-label-text">Front-end Developer Test Task</span>
+        </div>
+        <div class="cart" fxLayout="row" fxLayoutAlign="center center">
+            <span class="cart-label">cart</span>
+            <span class="cart-icon"><img src="assets/images/cart-icon.png" alt="Cart"></span>
+            <span class="cart-badge">3</span>
+        </div>
+    </div>
+    <div class="line"></div>
+</nav>
+<div class="shopping-container-wrapper">
+    <div class="shopping-container">
+        <div class="order-steps" fxLayout="column">
+            <div class="breadcrumbs">
+                <span class="active-link">Shipping</span>
+                <span>Billing</span>
+                <span>Payment</span>
+            </div>
+            <app-order-form></app-order-form>
+        </div>
+        <div class="order-summary">
+            <app-order-summary></app-order-summary>
+        </div>
+    </div>
+</div>

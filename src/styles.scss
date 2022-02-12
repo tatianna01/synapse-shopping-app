@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import '../src/assets/styles/_variables.scss';
+
+html, body { height: 100%; margin: 0; box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: $backgroundColor;
+}
+
+h2 {
+    font-family: $fontFamily;
+    padding: 0;
+    margin: 0;
+}
