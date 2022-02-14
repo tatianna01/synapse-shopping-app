@@ -1,4 +1,4 @@
-<h2 class="shipping-info-label">Shipping Info</h2>
+<h2 class="info-label">Shipping Info</h2>
 <div class="recipient-info">
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
         <h2 class="form-label">Recipient</h2>
@@ -8,7 +8,7 @@
         </div>
 
         <div class="phone-info" fxLayout="row" fxLayoutAlign="none center">
-            <input type="text" class="phone" placeholder="Daytime Phone" formControlName="daytimePhone">
+            <input type="text" class="phone" placeholder="Daytime Phone" formControlName="daytimePhone" prefix="+7" mask="(000) 000-00-00">
             <div class="delivery">For delivery <br /> questions only</div>
             <div *ngIf="(profileForm.get('daytimePhone').touched || profileForm.get('daytimePhone').dirty) &&profileForm.get('daytimePhone').invalid" class="hint"><span>Please enter your daytime phone</span></div>
         </div>
@@ -28,12 +28,11 @@
         <div class="input-wrapper">
             <input type="text" list="country_list" class="country" placeholder="Country" formControlName="country">
             <datalist id="country_list">
-                <option>Ukraine</option>
-                <option>Moldova</option>
+                <option *ngFor="let country of countryList">{{country}}</option>
             </datalist>
             <div *ngIf="(profileForm.get('country').touched || profileForm.get('country').dirty) && profileForm.get('country').invalid" class="hint"><span>Please enter your country</span></div>
             <input type="text" class="zip" placeholder="ZIP" formControlName="postcode">
-            <div *ngIf="(profileForm.get('postcode').touched || profileForm.get('postcode').dirty) &&profileForm.get('postcode').invalid" class="hint zip-hint"><span>Please enter your ZIP</span></div>
+            <div *ngIf="(profileForm.get('postcode').touched || profileForm.get('postcode').dirty) && profileForm.get('postcode').invalid" class="hint zip-hint"><span>Please enter your ZIP</span></div>
         </div>
 
         <button type="submit">Continue</button>

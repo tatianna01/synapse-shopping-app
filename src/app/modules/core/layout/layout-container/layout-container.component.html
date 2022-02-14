@@ -7,7 +7,7 @@
         <div class="cart" fxLayout="row" fxLayoutAlign="center center">
             <span class="cart-label">cart</span>
             <span class="cart-icon"><img src="assets/images/cart-icon.png" alt="Cart"></span>
-            <span class="cart-badge">3</span>
+            <span *ngIf="!(success$ | async)" class="cart-badge">3</span>
         </div>
     </div>
     <div class="line"></div>
@@ -15,15 +15,22 @@
 <div class="shopping-container-wrapper">
     <div class="shopping-container">
         <div class="order-steps" fxLayout="column">
-            <div class="breadcrumbs">
-                <span class="active-link">Shipping</span>
-                <span>Billing</span>
-                <span>Payment</span>
+            <div *ngIf="!(success$ | async)" class="breadcrumbs">
+                <a [routerLink]="'/shipping'" routerLinkActive="active-link">
+                    <span (click)="$event.stopPropagation();$event.preventDefault()">Shipping</span>
+                </a>
+                <a [routerLink]="'/billing'" routerLinkActive="active-link">
+                    <span (click)="$event.stopPropagation();$event.preventDefault()">Billing</span>
+                </a>
+                <a [routerLink]="'/payment'" routerLinkActive="active-link">
+                    <span (click)="$event.stopPropagation();$event.preventDefault()">Payment</span>
+                </a>
             </div>
-            <app-order-form></app-order-form>
+            <router-outlet></router-outlet>
         </div>
-        <div class="order-summary">
+        <div [ngClass]="(success$ | async) ? 'order-summary-pale' : 'order-summary'">
             <app-order-summary></app-order-summary>
+            <div *ngIf="success$ | async" class="overlap"></div>
         </div>
     </div>
 </div>

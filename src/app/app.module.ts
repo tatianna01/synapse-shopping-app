@@ -10,6 +10,8 @@ import { reducers, metaReducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false
+    }),
     FlexLayoutModule,
     HttpClientModule,
     StoreModule.forRoot(reducers, {
