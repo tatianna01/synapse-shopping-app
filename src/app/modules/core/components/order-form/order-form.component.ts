@@ -14,8 +14,14 @@ export class OrderFormComponent implements OnInit, OnDestroy {
 
   readonly constants: typeof Constants = Constants;
   readonly countryList = Constants.countryList;
+
+  showDropDown = false;
+
+  filteredCountry: string;
+
   destroy$: Subject<boolean> = new Subject<boolean>();
 
+  arrowDownClicked = false;
   detectGeoClicked = true;
   profileForm = this.fb.group({
     fullName: ['', [Validators.required, Validators.pattern(Constants.LETTERS_REGEX)]],
@@ -67,6 +73,16 @@ export class OrderFormComponent implements OnInit, OnDestroy {
         console.warn(`ERROR(${err.code}): ${err.message}`);
         alert('You have denied geolocation!');
       })
+    }
+  }
+
+  onCountrySelected(country: string): void {
+    this.profileForm.get('country').patchValue(country);
+  }
+
+  closeDropDown(): void {
+    if (this.showDropDown === true) {
+      this.showDropDown = !this.showDropDown;
     }
   }
 

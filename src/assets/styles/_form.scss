@@ -41,15 +41,13 @@ input[type="text"], input[type="email"] {
 
     font-family: $fontFamily;
     font-size: 16px;
-    line-height: 18px;
-    color: #6B6B6B;
-
-    font-size: 16px;
+    line-height: 20px;
     color: #000000;
     font-weight: 500;
+    text-overflow: ellipsis;
 }
 
-input:focus{
+input:focus {
     outline: 1px solid $mainColor;
 }
 
@@ -146,5 +144,67 @@ input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched, .redBorder {
 
 .zip-hint {
     left: 190px;
-    top:-50px;
+}
+
+ul {
+    border: 1px solid #DEDCDC;
+    border-bottom: none;
+    box-shadow: 0px -3px 7px rgba(0, 0, 0, 0.05);
+    border-radius: 5px 5px 0 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    background-color: #fff;
+    max-width: 178px;
+    max-height: 333px;
+    overflow-y: auto;
+    overflow-x: none;
+    width: 100%;
+    position: absolute;
+    bottom: 62px;
+    left: 0;
+    li {
+        padding: 10px 0 10px 15px;
+    }
+    li {
+        cursor: pointer;
+    }
+    li:hover {
+        background: #E6E9F0;
+        mix-blend-mode: normal;
+        opacity: 0.8;
+    }
+}
+
+.country-zip-wrapper {
+    position: relative;
+}
+
+input.country:focus {
+    outline: none;
+    border-radius: 0 0 5px 5px;
+}
+
+.arrow_down img {
+    position: absolute;
+    top: 17px;
+    left: 150px;
+    width: 16px;
+    cursor: pointer;
+}
+
+.back-button {
+    text-align: left;
+    color: $mainColor;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
 }

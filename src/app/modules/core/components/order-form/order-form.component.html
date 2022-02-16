@@ -8,8 +8,8 @@
         </div>
 
         <div class="phone-info" fxLayout="row" fxLayoutAlign="none center">
-            <input type="text" class="phone" placeholder="Daytime Phone" formControlName="daytimePhone" prefix="+7" mask="(000) 000-00-00">
-            <div class="delivery">For delivery <br /> questions only</div>
+            <input type="text" class="phone" placeholder="Daytime Phone" formControlName="daytimePhone" mask="+0 (000) 000-00-00">
+            <div class="delivery">For delivery <br/> questions only</div>
             <div *ngIf="(profileForm.get('daytimePhone').touched || profileForm.get('daytimePhone').dirty) &&profileForm.get('daytimePhone').invalid" class="hint"><span>Please enter your daytime phone</span></div>
         </div>
 
@@ -25,11 +25,13 @@
             <span (click)="onDetectFocus()" class="detect_focus"><img [src]="detectGeoClicked? 'assets/images/detect_focus.png':'assets/images/detect_unfocus.png'" alt="Detect Focus"></span>
             <div *ngIf="(profileForm.get('city').touched || profileForm.get('city').dirty) &&profileForm.get('city').invalid" class="hint"><span>Please enter your city</span></div>
         </div>
-        <div class="input-wrapper">
-            <input type="text" list="country_list" class="country" placeholder="Country" formControlName="country">
-            <datalist id="country_list">
-                <option *ngFor="let country of countryList">{{country}}</option>
-            </datalist>
+
+        <div class="input-wrapper country-zip-wrapper">
+            <ul *ngIf="showDropDown" class="listOfCountries">
+                <li *ngFor="let country of countryList | filter: profileForm.get('country').value" (click)="onCountrySelected(country)">{{country}}</li>
+            </ul>
+            <input clickOutside (clickOutside)="closeDropDown()" autocomplete="off" (focuson)="showDropDown=!showDropDown" id="countrySearch" type="text" (click)="showDropDown = !showDropDown" class="country" placeholder="Country" formControlName="country">
+            <span class="arrow_down" (click)="showDropDown=!showDropDown"><img src="assets/images/arrow_down.png" alt="Detect Focus"></span>
             <div *ngIf="(profileForm.get('country').touched || profileForm.get('country').dirty) && profileForm.get('country').invalid" class="hint"><span>Please enter your country</span></div>
             <input type="text" class="zip" placeholder="ZIP" formControlName="postcode">
             <div *ngIf="(profileForm.get('postcode').touched || profileForm.get('postcode').dirty) && profileForm.get('postcode').invalid" class="hint zip-hint"><span>Please enter your ZIP</span></div>

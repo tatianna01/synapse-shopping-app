@@ -28,7 +28,7 @@
             </div>
             <router-outlet></router-outlet>
         </div>
-        <div [ngClass]="(success$ | async) ? 'order-summary-pale' : 'order-summary'">
+        <div class="summary" [ngClass]="(success$ | async) ? 'order-summary-pale' : 'order-summary'">
             <app-order-summary></app-order-summary>
             <div *ngIf="success$ | async" class="overlap"></div>
         </div>

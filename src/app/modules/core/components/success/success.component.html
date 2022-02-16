@@ -6,4 +6,57 @@
 
 <p>Estimated delivery Day is <br> <b>Friday 1st April 2016</b></p>
 
-<div class="print" (click)="printPage()"><b>Print Recipe</b></div>
+<div style="display: none;" id="print-section"> 
+    <section class="info-section">
+        <h2 class="info-label">Shipping Info</h2>
+        <div class="block-info">
+            <h3 class="form-label">Recipient</h3>
+            <p><b>Full Name: </b>{{(shippingInfo$ | async).fullName}}</p>
+            <p><b>Daytime Phone: </b>{{(shippingInfo$ | async).daytimePhone}}</p>
+        </div>
+        <div class="block-info">
+            <h3 class="form-label">Address</h3>
+            <p><b>Street Address: </b>{{(shippingInfo$ | async).road}}</p>
+            <p><b>Apt, Suite, Bldg, Gate Code. (optional): </b>{{(shippingInfo$ | async).optionalGeoInfo}}</p>
+            <p><b>City: </b>{{(shippingInfo$ | async).city}}</p>
+            <p><b>Country: </b>{{(shippingInfo$ | async).country}}</p>
+            <p><b>Zip: </b>{{(shippingInfo$ | async).postcode}}</p>
+        </div>
+    </section>
+    <section class="info-section">
+        <h2 class="info-label">Billing Information</h2>
+        <div class="block-info">
+            <h3 class="form-label">Billing Contact</h3>
+            <p><b>Full Name: </b>{{(billingInfo$ | async).fullName}}</p>
+            <p><b>Email Address: </b>{{(billingInfo$ | async).email}}</p>
+        </div>
+        <div class="block-info">
+            <h3 class="form-label">Billing Address</h3>
+            <p><b>Street Address: </b>{{(billingInfo$ | async).road}}</p>
+            <p><b>Apt, Suite, Bldg, Gate Code. (optional): </b>{{(billingInfo$ | async).optionalGeoInfo}}</p>
+            <p><b>City: </b>{{(billingInfo$ | async).city}}</p>
+            <p><b>Country: </b>{{(billingInfo$ | async).country}}</p>
+            <p><b>Zip: </b>{{(billingInfo$ | async).postcode}}</p>
+        </div>
+    </section>
+    <section class="info-section">
+        <h2 class="info-label">Payment</h2>
+        <div class="block-info">
+            <h3 class="form-label">Cardholder Name</h3>
+            <p><b>Full Name: </b>{{(paymentInfo$ | async).cardholderName}}</p>
+            <p><b>Card Number: </b>{{(paymentInfo$ | async).cardNumber}}</p>
+            <p><b>Expire Date: </b>{{(paymentInfo$ | async).expireDate}}</p>
+            <p><b>Security Code: </b>{{(paymentInfo$ | async).securityCode}}</p>
+        </div>
+    </section>
+    <section class="info-section order-info">
+        <h2 class="info-label">Thank you for your order!</h2>
+        <div class="block-info">
+            <p><b>Order number is: 188787788</b></p>
+            <p class="email-confirm">Your will recieve an email confirmation shortly to <span class="mail">{{(billingInfo$ | async).email}}</span></p>
+            <p>Estimated delivery Day is <br> <b>Friday 1st April 2016</b></p>
+        </div>
+    </section>
+</div>
+
+<button class="print-button" styleSheetFile="assets/styles/_print.css" printSectionId="print-section" ngxPrint><b>Print Recipe</b></button> 

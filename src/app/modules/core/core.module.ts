@@ -11,9 +11,13 @@ import { BillingFormComponent } from './components/billing-form/billing-form.com
 import { RouterModule } from '@angular/router';
 import { PaymentFormComponent } from './components/payment-form/payment-form.component';
 import { SuccessComponent } from './components/success/success.component';
+import { FilterPipe } from 'src/app/pipes/filter/filter.pipe';
+import { NgxPrintModule } from 'ngx-print';
+import { ClickOutsideDirective } from 'src/app/directives/click-outside/click-outside.directive';
 
 @NgModule({
   declarations: [
+    FilterPipe,
     LayoutContainerComponent,
     OrderFormComponent,
     OrderSummaryComponent,
@@ -21,6 +25,7 @@ import { SuccessComponent } from './components/success/success.component';
     BillingFormComponent,
     PaymentFormComponent,
     SuccessComponent,
+    ClickOutsideDirective,
   ],
   exports: [LayoutContainerComponent],
   imports: [
@@ -29,6 +34,7 @@ import { SuccessComponent } from './components/success/success.component';
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
+    NgxPrintModule,
     NgxMaskModule.forChild(),
   ]
 })

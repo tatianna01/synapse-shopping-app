@@ -1,0 +1,48 @@
+.info-label {
+    color: #5A1094;
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: -1.06px;
+    line-height: 31px;
+    margin-bottom: 14px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h2, h3, h4, p {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+b {
+    font-family: 'Open Sans', sans-serif;
+}
+.form-label {
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 18px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
+    color: #5A1094;
+}
+
+.block-info {
+    margin-bottom: 15px;
+}
+
+.info-section {
+    margin-bottom: 15px;
+}
+
+.email-confirm {
+    margin-bottom: 20px;
+}
+
+.mail {
+    color: #5A1094;
+    cursor: pointer;
+}
+
+.order-info {
+    margin-top: 20px;
+}

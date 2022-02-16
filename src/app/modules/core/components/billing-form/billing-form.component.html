@@ -1,3 +1,4 @@
+<button class="back-button" [routerLink]="'/shipping'">Back</button>
 <div class="bill-info-title" fxLayout="row" fxLayoutAlign="space-between center">
     <h2 class="billing-info-label">Billing Information</h2>
     <span class="shipinfo-link" (click)="onGetShipInfo()">Same as shipping</span>
@@ -27,11 +28,12 @@
             <span (click)="onDetectFocus()" class="detect_focus"><img [src]="detectGeoClicked? 'assets/images/detect_focus.png':'assets/images/detect_unfocus.png'" alt="Detect Focus"></span>
             <div *ngIf="(billingForm.get('city').touched || billingForm.get('city').dirty) && billingForm.get('city').invalid" class="hint"><span>Please enter your city</span></div>
         </div>
-        <div class="input-wrapper">
-            <input type="text" list="country_list" class="country" placeholder="Country" formControlName="country">
-            <datalist id="country_list">
-                <option *ngFor="let country of countryList">{{country}}</option>
-            </datalist>
+        <div class="input-wrapper country-zip-wrapper">
+            <ul *ngIf="showDropDown" class="listOfCountries">
+                <li *ngFor="let country of countryList | filter: billingForm.get('country').value" (click)="onCountrySelected(country)">{{country}}</li>
+            </ul>
+            <input clickOutside (clickOutside)="closeDropDown()" autocomplete="off" (focuson)="showDropDown=!showDropDown" id="countrySearch" type="text" (click)="showDropDown = !showDropDown" class="country" placeholder="Country" formControlName="country">
+            <span class="arrow_down" (click)="showDropDown=!showDropDown"><img src="assets/images/arrow_down.png" alt="Detect Focus"></span>
             <div *ngIf="(billingForm.get('country').touched || billingForm.get('country').dirty) && billingForm.get('country').invalid" class="hint"><span>Please enter your country</span></div>
             <input type="text" class="zip" placeholder="ZIP" formControlName="postcode">
             <div *ngIf="(billingForm.get('postcode').touched || billingForm.get('postcode').dirty) && billingForm.get('postcode').invalid" class="hint zip-hint"><span>Please enter your ZIP</span></div>

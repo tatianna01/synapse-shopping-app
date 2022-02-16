@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Constants } from 'src/app/constants/constants';
 import { ReceiptService } from 'src/app/services/receipt/receipt.service';
 
@@ -8,14 +10,17 @@ import { ReceiptService } from 'src/app/services/receipt/receipt.service';
   templateUrl: './payment-form.component.html',
   styleUrls: ['./payment-form.component.scss']
 })
-export class PaymentFormComponent implements OnInit {
+export class PaymentFormComponent implements OnInit, OnDestroy {
 
   paymentForm = this.fb.group({
     cardholderName: ['', [Validators.required, Validators.pattern(Constants.LETTERS_REGEX)]],
     cardNumber: ['', [Validators.required]],
-    expireDate: ['', [Validators.required, Validators.pattern(Constants.CREDIT_CARD_DATE)]],
+    expireDate: ['', [Validators.required]],
     securityCode: ['', [Validators.required, Validators.pattern(Constants.NUMBERS_REGEX)]],
   });
+
+  visaDetected: boolean;
+  destroy$: Subject<boolean> = new Subject<boolean>();
   
   constructor(
     private fb: FormBuilder,
@@ -23,6 +28,18 @@ export class PaymentFormComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.paymentForm.get('cardNumber').valueChanges
+      .pipe(
+        takeUntil(this.destroy$),
+        debounceTime(500),
+        distinctUntilChanged()
+      ).subscribe((val: string) => {
+        if(/4[0-9]{12}(?:[0-9]{3})?/.test(val.replace(/\s/g, ''))) {
+          this.visaDetected = true;
+        } else {
+          this.visaDetected = false;
+        }
+      });
   }
 
   onSubmit(): void {
@@ -37,5 +54,10 @@ export class PaymentFormComponent implements OnInit {
     Object.keys(form.controls).forEach(key => {
       form.get(key).markAsTouched();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

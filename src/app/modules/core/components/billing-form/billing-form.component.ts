@@ -19,6 +19,10 @@ export class BillingFormComponent implements OnInit {
   readonly countryList = Constants.countryList;
   detectGeoClicked = true;
 
+  showDropDown = false;
+
+  filteredCountry: string;
+
   shippingInfo$: Observable<ShippingInfo> = this.store$.pipe(select(shippingInfoSelector));
 
   shipInfo: ShippingInfo;
@@ -65,6 +69,16 @@ export class BillingFormComponent implements OnInit {
     this.shippingInfo$.subscribe((res) => {
       this.billingForm.patchValue(res);
     })
+  }
+
+  onCountrySelected(country: string): void {
+    this.billingForm.get('country').patchValue(country);
+  }
+
+  closeDropDown(): void {
+    if (this.showDropDown === true) {
+      this.showDropDown = !this.showDropDown;
+    }
   }
 
   onSubmit(): void {

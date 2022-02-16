@@ -33,3 +33,16 @@ p {
     margin-top: 31px;
     cursor: pointer;
 }
+
+.print-button {
+    color: $mainColor;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 31px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
+}
