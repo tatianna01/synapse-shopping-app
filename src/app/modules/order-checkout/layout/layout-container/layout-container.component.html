@@ -16,17 +16,22 @@
     <div class="shopping-container">
         <div class="order-steps" fxLayout="column">
             <div *ngIf="!(success$ | async)" class="breadcrumbs">
-                <a [routerLink]="'/shipping'" routerLinkActive="active-link">
+                <a [ngClass]="staticUrlArray === 1 ? 'active-link' : ''">
                     <span (click)="$event.stopPropagation();$event.preventDefault()">Shipping</span>
                 </a>
-                <a [routerLink]="'/billing'" routerLinkActive="active-link">
+                <a [ngClass]="staticUrlArray === 2 ? 'active-link' : ''">
                     <span (click)="$event.stopPropagation();$event.preventDefault()">Billing</span>
                 </a>
-                <a [routerLink]="'/payment'" routerLinkActive="active-link">
+                <a [ngClass]="staticUrlArray === 3 ? 'active-link' : ''">
                     <span (click)="$event.stopPropagation();$event.preventDefault()">Payment</span>
                 </a>
             </div>
-            <router-outlet></router-outlet>
+            <ng-container [ngSwitch]="staticUrlArray">
+                <app-order-form *ngSwitchCase="1"></app-order-form>
+                <app-billing-form *ngSwitchCase="2"></app-billing-form>
+                <app-payment-form *ngSwitchCase="3"></app-payment-form>
+                <app-success *ngSwitchCase="4"></app-success>
+            </ng-container>
         </div>
         <div class="summary" [ngClass]="(success$ | async) ? 'order-summary-pale' : 'order-summary'">
             <app-order-summary></app-order-summary>

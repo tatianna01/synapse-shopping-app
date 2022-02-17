@@ -1,9 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Constants } from 'src/app/constants/constants';
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 import { ReceiptService } from 'src/app/services/receipt/receipt.service';
+import { shippingInfoSelector } from 'src/app/store/selectors/receipt.selectors';
+import { ProductsStateModel } from 'src/app/store/state/products.state';
+import { ShippingInfo } from 'src/app/store/state/receipt.state';
+import { LayoutContainerComponent } from '../../layout/layout-container/layout-container.component';
 
 @Component({
   selector: 'app-order-form',
@@ -18,6 +24,8 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   showDropDown = false;
 
   filteredCountry: string;
+
+  shippingInfo$: Observable<ShippingInfo> = this.store$.pipe(select(shippingInfoSelector));
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -36,10 +44,13 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private geoService: GeolocationService,
-    private receiptService: ReceiptService
+    private receiptService: ReceiptService,
+    private store$: Store<ProductsStateModel>
     ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.shippingInfo$.pipe(takeUntil(this.destroy$)).subscribe((res) => this.profileForm.patchValue(res))
+   }
 
   onSubmit(): void {
     if (this.profileForm.invalid) {

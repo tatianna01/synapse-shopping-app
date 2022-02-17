@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Constants } from 'src/app/constants/constants';
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 import { ReceiptService } from 'src/app/services/receipt/receipt.service';
-import { shippingInfoSelector } from 'src/app/store/selectors/receipt.selectors';
-import { ReceiptStateModel, ShippingInfo } from 'src/app/store/state/receipt.state';
+import { billingInfoSelector, shippingInfoSelector } from 'src/app/store/selectors/receipt.selectors';
+import { BillingInfo, ReceiptStateModel, ShippingInfo } from 'src/app/store/state/receipt.state';
 
 @Component({
   selector: 'app-billing-form',
@@ -24,6 +25,7 @@ export class BillingFormComponent implements OnInit {
   filteredCountry: string;
 
   shippingInfo$: Observable<ShippingInfo> = this.store$.pipe(select(shippingInfoSelector));
+  billingInfo$: Observable<BillingInfo> = this.store$.pipe(select(billingInfoSelector));
 
   shipInfo: ShippingInfo;
 
@@ -47,6 +49,7 @@ export class BillingFormComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.billingInfo$.pipe(takeUntil(this.destroy$)).subscribe((res) => this.billingForm.patchValue(res));
   }
 
   onDetectFocus(): void {
@@ -92,6 +95,10 @@ export class BillingFormComponent implements OnInit {
         this.receiptService.updateBillingInfo(this.billingForm.value);
       }
     }
+  }
+
+  goToShippingForm(): void {
+    this.receiptService.returnToShippingPage();
   }
 
   private checkValidation(form: FormGroup): void {

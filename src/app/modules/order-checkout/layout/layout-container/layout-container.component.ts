@@ -12,9 +12,14 @@ import { ReceiptStateModel } from 'src/app/store/state/receipt.state';
 export class LayoutContainerComponent implements OnInit {
 
   success$: Observable<boolean> = this.store$.pipe(select(successSelector));
+  static stepsCounter: number;
 
-  constructor(private store$: Store<ReceiptStateModel>) { }
-
+  constructor(private store$: Store<ReceiptStateModel>) {
+    LayoutContainerComponent.stepsCounter = 1;
+   }
+   get staticUrlArray() {
+    return LayoutContainerComponent.stepsCounter;
+  }
   ngOnInit(): void { }
 
 }

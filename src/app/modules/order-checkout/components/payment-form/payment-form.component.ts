@@ -1,9 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Constants } from 'src/app/constants/constants';
 import { ReceiptService } from 'src/app/services/receipt/receipt.service';
+import { paymentInfoSelector } from 'src/app/store/selectors/receipt.selectors';
+import { PaymentInfo, ReceiptStateModel } from 'src/app/store/state/receipt.state';
 
 @Component({
   selector: 'app-payment-form',
@@ -19,15 +22,19 @@ export class PaymentFormComponent implements OnInit, OnDestroy {
     securityCode: ['', [Validators.required, Validators.pattern(Constants.NUMBERS_REGEX)]],
   });
 
+  paymentInfo$: Observable<PaymentInfo> = this.store$.pipe(select(paymentInfoSelector));
+  
   visaDetected: boolean;
   destroy$: Subject<boolean> = new Subject<boolean>();
   
   constructor(
     private fb: FormBuilder,
     private receiptService: ReceiptService,
+    private store$: Store<ReceiptStateModel>,
     ) { }
 
   ngOnInit(): void {
+    this.paymentInfo$.pipe(takeUntil(this.destroy$)).subscribe((res) => this.paymentForm.patchValue(res));
     this.paymentForm.get('cardNumber').valueChanges
       .pipe(
         takeUntil(this.destroy$),
@@ -48,6 +55,9 @@ export class PaymentFormComponent implements OnInit, OnDestroy {
     } else {
       this.receiptService.updatePaymentInfo(this.paymentForm.value);
     }
+  }
+  goToBillingForm(): void {
+    this.receiptService.returnToBillingPage();
   }
 
   private checkValidation(form: FormGroup): void {

@@ -1,16 +1,16 @@
-<button class="back-button" [routerLink]="'/billing'">Back</button>
+<button class="back-button" (click)="goToBillingForm()">Back</button>
 <h2 class="info-label">Payment</h2>
 <p class="payment-description" fxLayout="row" fxLayoutAlign="center center"><span class="lock"><img src="assets/images/lock.png" alt="lock"></span><span>This is a secure 128-bit SSL encrypted payment</span></p>
 <div class="recipient-info">
     <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
         <h2 class="form-label">Cardholder Name</h2>
-        <div class="input-wrapper">
+        <div class="input-wrapper input-wrapper-payment">
             <input type="text" placeholder="Name as it appears on your card" formControlName="cardholderName">
             <div *ngIf="(paymentForm.get('cardholderName').touched || paymentForm.get('cardholderName').dirty) && paymentForm.get('cardholderName').invalid" class="hint"><span>Please enter cardholder name</span></div>
         </div>
 
         <h2 class="form-label">Card Number</h2>
-        <div class="input-wrapper">
+        <div class="input-wrapper input-wrapper-payment">
             <input type="text" placeholder="XXXX XXXX XXXX XXXX XXXX" formControlName="cardNumber" mask="0000 0000 0000 0000 0000">
             <div *ngIf="(paymentForm.get('cardNumber').touched || paymentForm.get('cardNumber').dirty) && paymentForm.get('cardNumber').invalid" class="hint"><span>Please enter card number</span></div>
             <span *ngIf="visaDetected" class="visa_logo"><img src="assets/images/visa_logo.png" alt="visa_logo"></span>
@@ -19,7 +19,7 @@
         <div fxLayout="row" fxLayoutAlign="start center">
             <div>
                 <h2 class="form-label">Expire Date</h2>
-                <div class="input-wrapper">
+                <div class="input-wrapper input-wrapper-payment">
                     <input class="expireDate" type="text" placeholder="MM / YY" formControlName="expireDate" mask="M0/00">
                     <div *ngIf="(paymentForm.get('expireDate').touched || paymentForm.get('expireDate').dirty) && paymentForm.get('expireDate').invalid" class="hint card-hint"><span>Please enter expire date</span></div>
                 </div>
@@ -27,7 +27,7 @@
     
             <div>
                 <h2 class="form-label">Security Code</h2>
-                <div class="input-wrapper">
+                <div class="input-wrapper input-wrapper-payment">
                     <input class="security" type="text" formControlName="securityCode" mask="000">
                     <div *ngIf="(paymentForm.get('securityCode').touched || paymentForm.get('securityCode').dirty) && paymentForm.get('securityCode').invalid" class="hint card-hint"><span>Please enter security code</span></div>
                 </div>
